@@ -37,12 +37,16 @@ typedef NS_OPTIONS(NSUInteger, ASDepthModalOptions) {
 };
 
 /*
-Mostly inspired by http://lab.hakim.se/avgrund/
-*/
+ Mostly inspired by http://lab.hakim.se/avgrund/
+ */
 @interface ASDepthModalViewController : UIViewController <UIGestureRecognizerDelegate>
 
 + (void)presentView:(UIView *)view backgroundColor:(UIColor *)color options:(ASDepthModalOptions)options completionHandler:(void(^)())handler;
 + (void)presentView:(UIView *)view;
 + (void)dismiss;
+
+- (void)dismissObject;
+- (void)presentView:(UIView *)view withBackgroundColor:(UIColor *)color options:(ASDepthModalOptions)options completionHandler:(void(^)())handler;
+
 
 @end

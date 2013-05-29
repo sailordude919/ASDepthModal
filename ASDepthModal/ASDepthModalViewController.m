@@ -29,7 +29,7 @@
 #import "UIImage+Blur.h"
 
 static NSTimeInterval const kModalViewAnimationDuration = 0.3;
-static CGFloat const kBlurValue = 0.2;
+static CGFloat const kBlurValue = 0.05;
 static CGFloat const kDefaultiPhoneCornerRadius = 4;
 static CGFloat const kDefaultiPadCornerRadius = 6;
 
@@ -54,7 +54,7 @@ static NSInteger const kDepthModalOptionTapMask = 1 << 9;
     if (self)
     {
         self.view.backgroundColor = [UIColor blackColor];
-        self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;                
+        self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         self.view.backgroundColor = [UIColor blackColor];
     }
     return self;
@@ -89,6 +89,10 @@ static NSInteger const kDepthModalOptionTapMask = 1 << 9;
                              self.completionHandler();
                          }
                      }];
+}
+
+- (void)dismissObject {
+    [self dismiss];
 }
 
 - (void)animatePopupWithStyle:(ASDepthModalOptions)options
@@ -134,7 +138,7 @@ static NSInteger const kDepthModalOptionTapMask = 1 << 9;
         self.view.backgroundColor = color;
     }
     self.completionHandler = handler;
-
+    
     window = [UIApplication sharedApplication].keyWindow;
     self.rootViewController = window.rootViewController;
     frame = self.rootViewController.view.frame;
@@ -164,7 +168,7 @@ static NSInteger const kDepthModalOptionTapMask = 1 << 9;
     self.rootViewController.view.frame = frame;
     [self.view addSubview:self.rootViewController.view];
     window.rootViewController = self;
-
+    
     self.popupView = [[UIView alloc] initWithFrame:view.frame];
     self.popupView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
     [self.popupView addSubview:view];
@@ -175,7 +179,7 @@ static NSInteger const kDepthModalOptionTapMask = 1 << 9;
     [self.view addSubview:self.coverView];
     
     if ((options & kDepthModalOptionTapMask) == ASDepthModalOptionTapOutsideToClose)
-    {    
+    {
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleCloseAction:)];
         tapGesture.delegate = self;
         [self.coverView addGestureRecognizer:tapGesture];
@@ -185,7 +189,7 @@ static NSInteger const kDepthModalOptionTapMask = 1 << 9;
     self.popupView.center = CGPointMake(self.coverView.bounds.size.width/2, self.coverView.bounds.size.height/2);
     
     self.coverView.alpha = 0;
-        
+    
     if ((options & kDepthModalOptionBlurMask) == ASDepthModalOptionBlur) {
         UIImage *image;
         
