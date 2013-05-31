@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   }
   s.homepage = "https://github.com/autresphere/ASDepthModal"
   s.source = {
-    :git => "https://github.com/sailordude919/ASDepthModal.git",
+    :git => "https://github.com/sailordude919/ASDepthModal",
     :tag => "1.0.0"
   }
   s.platform = :ios, '6.0'
